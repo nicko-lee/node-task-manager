@@ -26,7 +26,7 @@ app.get('/users', (req, res) => {
     User.find({}).then((users) => {
         res.send(users)
     }).catch((e) => {
-        res.status(500).send()
+        res.status(500).send(e)
     })
 })
 
@@ -35,7 +35,7 @@ app.get('/users/:id', (req, res) => {
 
     User.findById(_id).then((user) => {
         if (!user) {
-            return res.status(404).send()
+            return res.status(404).send(`User with id ${_id} could not be found.`)
         }
 
         res.send(user)
@@ -51,6 +51,28 @@ app.post('/tasks', (req, res) => {
         res.status(201).send(task)
     }).catch((e) => {
         res.status(400).send(e)
+    })
+})
+
+app.get('/tasks', (req, res) => {
+    Task.find({}).then((tasks) => {
+        res.send(tasks)
+    }).catch((e) => {
+        res.status(500).send(e)
+    })
+})
+
+app.get('/tasks/:id', (req, res) => {
+    const _id = req.params.id
+
+    Task.findById(_id).then((task) => {
+        if (!task) {
+            return res.status(404).send(`Task with id ${_id} could not be found.`)
+        }
+
+        res.send(task)
+    }).catch((e) => {
+        res.status(500).send(e)
     })
 })
 

@@ -4,5 +4,8 @@ node_modules/
 ### macOS ###
 .DS_Store
 
-### App specific #
+### App specific ###
 .env
+
+### Misc ###
+playground/
